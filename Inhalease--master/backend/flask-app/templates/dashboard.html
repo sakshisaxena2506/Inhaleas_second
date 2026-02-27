@@ -176,13 +176,17 @@
         fillOpacity: 0.8
     }).addTo(map).bindPopup("<b>Your Current Location</b><br>Predicted AQI: {{ data.predicted_aqi }}").openPopup();
 
-    // Generate random micro-sensor spots around user
-    for (let i = 0; i < 15; i++) {
-        let latOff = (Math.random() - 0.5) * 0.04;
-        let lngOff = (Math.random() - 0.5) * 0.04;
-        let pLat = {{ data.lat }
-    } + latOff;
-    let pLng = {{ data.lng }} + lngOff;
+   
+  // Generate random micro-sensor spots around user
+for (let i = 0; i < 15; i++) {
+    let latOff = (Math.random() - 0.5) * 0.04;
+    let lngOff = (Math.random() - 0.5) * 0.04;
+
+    let baseLat = {{ data.lat | tojson }};
+    let baseLng = {{ data.lng | tojson }};
+
+    let pLat = baseLat + latOff;
+    let pLng = baseLng + lngOff;
 
     let severityIndex = Math.floor(Math.random() * 4);
     let color = colors[severityIndex];
@@ -194,6 +198,6 @@
         fillOpacity: 0.3,
         radius: 300 + Math.random() * 500
     }).addTo(map).bindPopup(`<b>Microsensor Node</b><br>AQI Reading: ${val}`);
-    }
+}
 </script>
 {% endblock %}
