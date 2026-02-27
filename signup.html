@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - InhaleEase</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .auth-card h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #38bdf8;
+        }
+
+        .btn-block {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .auth-links {
+            margin-top: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .auth-links a {
+            color: #38bdf8;
+            text-decoration: none;
+        }
+
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="animated-bg">
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+    </div>
+
+    <!-- Back to Home -->
+    <a href="index.html"
+        style="position: absolute; top: 2rem; left: 2rem; color: #fff; text-decoration: none; z-index: 20; display: flex; align-items: center; gap: 10px;">
+        <i class="fas fa-arrow-left"></i> Home
+    </a>
+
+    <div class="auth-container">
+        <div class="auth-card glass-card">
+            <h2>Create an Account</h2>
+            <form action="dashboard.html">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" class="form-control" required placeholder="John">
+                    </div>
+                    <div class="form-group">
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" class="form-control" required placeholder="Doe">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="location" style="display: flex; justify-content: space-between;">
+                        Primary Location
+                        <button type="button" id="signup-detect-btn"
+                            style="background: none; border: none; color: #38bdf8; cursor: pointer; font-size: 0.9em;">
+                            <i class="fas fa-location-crosshairs"></i> Detect
+                        </button>
+                    </label>
+                    <input type="text" id="location" class="form-control" required placeholder="e.g. New York, NY">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" required placeholder="Create a password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            </form>
+            <div class="auth-links">
+                <p>Already have an account? <a href="login.html">Log in</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        const detectBtn = document.getElementById('signup-detect-btn');
+        if (detectBtn) {
+            detectBtn.addEventListener('click', () => {
+                if ("geolocation" in navigator) {
+                    const originalText = detectBtn.innerHTML;
+                    detectBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                    detectBtn.disabled = true;
+
+                    navigator.geolocation.getCurrentPosition(async (position) => {
+                        try {
+                            const lat = position.coords.latitude;
+                            const lon = position.coords.longitude;
+                            const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
+                            const data = await res.json();
+                            const city = data.city || data.locality || data.principalSubdivision || 'Unknown';
+                            if (city !== 'Unknown') {
+                                document.getElementById('location').value = city;
+                            } else {
+                                alert("Could not determine your exact city.");
+                            }
+                        } catch (e) {
+                            alert("Location service unavailable.");
+                        } finally {
+                            detectBtn.innerHTML = originalText;
+                            detectBtn.disabled = false;
+                        }
+                    }, () => {
+                        alert("Location access denied.");
+                        detectBtn.innerHTML = originalText;
+                        detectBtn.disabled = false;
+                    });
+                } else {
+                    alert("Geolocation is not supported by your browser.");
+                }
+            });
+        }
+
+        document.querySelector('form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const firstName = document.getElementById('fname').value;
+            const lastName = document.getElementById('lname').value;
+            const email = document.getElementById('email').value;
+            const city = document.getElementById('location').value;
+            const password = document.getElementById('password').value;
+            const btn = document.querySelector('button[type="submit"]');
+
+            btn.textContent = 'Signing up...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(`${window.AppConfig.API_BASE_URL}/auth/signup`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        firstName, lastName, email, password, location: { city }
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    localStorage.setItem('token', result.data.token);
+                    localStorage.setItem('user', JSON.stringify(result.data));
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert(result.error);
+                }
+            } catch (err) {
+                alert('Connection error');
+            } finally {
+                btn.textContent = 'Sign Up';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>

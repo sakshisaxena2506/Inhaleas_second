@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InhaleEase - AI Based Air Quality Monitoring</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="animated-bg">
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo"><i class="fas fa-leaf"></i> Inhale<span>Ease</span></a>
+            <div class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="login.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">Login</a>
+                <a href="signup.html" class="btn btn-primary" style="padding: 0.5rem 1rem;">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-tagline">AI-Powered Ecosystem</div>
+            <h1>Inhale Easier with <span>Real-time</span> Monitoring</h1>
+            <p>Advanced artificial intelligence meets environmental sensing. Monitor, predict, and protect your health
+                with hyper-local air quality insights.</p>
+            <div class="hero-buttons">
+                <a href="#features" class="btn btn-primary">Explore Features</a>
+                <a href="dashboard.html" class="btn btn-outline">Live Dashboard</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features">
+        <div class="section-header">
+            <h2>Intelligent Features</h2>
+            <p style="color: var(--text-muted);">Cutting-edge technology protecting what matters most.</p>
+        </div>
+        <div class="features-grid">
+            <div class="glass-card feature-card">
+                <div class="feature-icon"><i class="fas fa-satellite-dish"></i></div>
+                <h3>Real-time Tracking</h3>
+                <p>Instant AQI updates from our network of high-precision IoT sensors with street-level accuracy.</p>
+            </div>
+            <div class="glass-card feature-card">
+                <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                <h3>AI Prediction Model</h3>
+                <p>Advanced deep learning algorithms predict air quality up to 72 hours in advance with 94% accuracy.
+                </p>
+            </div>
+            <div class="glass-card feature-card">
+                <div class="feature-icon"><i class="fas fa-heartbeat"></i></div>
+                <h3>Health Insights</h3>
+                <p>Personalized health recommendations based on your local air quality and physical conditions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="glass-card predictor-ui">
+            <div class="predictor-content">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem;">Check Your Local Air Quality</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">Enter your city or zip code to view real-time
+                    pollutants, particulate matter, and our AI-generated wellness forecast.</p>
+                <form class="search-bar" action="dashboard.html" style="flex-wrap: wrap;">
+                    <input type="text" id="home-city-input" placeholder="Enter city name..." required>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Check AQI</button>
+                    <button type="button" id="home-detect-btn" class="btn btn-outline" style="white-space: nowrap;"><i
+                            class="fas fa-location-crosshairs"></i> Current Location</button>
+                </form>
+            </div>
+            <div class="predictor-visual" style="text-align: center; padding: 2rem;">
+                <div
+                    style="font-size: 6rem; color: #4ade80; font-weight: 800; text-shadow: 0 0 30px rgba(74, 222, 128, 0.4);">
+                    24
+                </div>
+                <div style="font-size: 1.5rem; font-weight: 600; margin-top: 1rem;">AQI: Excellent</div>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">Current reading in your area</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2>InhaleEase</h2>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 InhaleEase AI. All rights reserved.</p>
+        <div style="margin-top: 1rem;">
+            <a href="#"
+                style="color: var(--text-muted); text-decoration: none; margin: 0 10px; font-size: 0.9rem;">Privacy
+                Policy</a>
+            <a href="#"
+                style="color: var(--text-muted); text-decoration: none; margin: 0 10px; font-size: 0.9rem;">Terms of
+                Service</a>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
